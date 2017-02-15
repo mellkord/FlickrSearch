@@ -4,6 +4,8 @@
 //
 
 #import "ADRFlickrPhotoBuilder.h"
+#import "NSArray+BlocksKit.h"
+
 
 
 @implementation ADRFlickrPhotoBuilder
@@ -32,7 +34,12 @@
         return nil;
     }
 
-    //map from BlocksKit
+    [photosArray bk_map:^ADRFlickrPhoto*(NSDictionary *photoDict) {
+        NSUInteger 
+
+
+        return nil;
+    }];
     return nil;
 }
 
