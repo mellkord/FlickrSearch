@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+///TODO Docs
 @interface ADRFlickrSearchLoadingCellViewModel : NSObject
 
 @property (nonatomic, assign, readonly, getter=isLoading) BOOL loading;
