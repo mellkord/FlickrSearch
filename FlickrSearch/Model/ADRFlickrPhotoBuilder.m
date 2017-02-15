@@ -5,7 +5,7 @@
 
 #import "ADRFlickrPhotoBuilder.h"
 #import "NSArray+BlocksKit.h"
-
+#import "ADRFlickrPhoto.h"
 
 
 @implementation ADRFlickrPhotoBuilder
@@ -35,10 +35,49 @@
     }
 
     [photosArray bk_map:^ADRFlickrPhoto*(NSDictionary *photoDict) {
-        NSUInteger 
+        NSUInteger identifier = ((NSNumber *)photosDict[@"id"]).unsignedIntegerValue;
 
+        if (identifier == 0)
+        {
+            return nil;
+        }
 
-        return nil;
+        NSUInteger server = ((NSNumber *)photosDict[@"server"]).unsignedIntegerValue;
+
+        if (server == 0)
+        {
+            return nil;
+        }
+
+        NSUInteger farm = ((NSNumber *)photosDict[@"farm"]).unsignedIntegerValue;
+
+        if (farm == 0)
+        {
+            return nil;
+        }
+
+        NSString *owner = photosDict[@"owner"];
+
+        if (!owner)
+        {
+            return nil;
+        }
+
+        NSString *secret = photosDict[@"secret"];
+
+        if (!secret)
+        {
+            return nil;
+        }
+
+        NSString *title = photosDict[@"title"];
+
+        if (!title)
+        {
+            return nil;
+        }
+
+        return [[ADRFlickrPhoto alloc] initWithIdentifier:identifier title:title owner:owner secret:secret server:server farm:farm];
     }];
     return nil;
 }
