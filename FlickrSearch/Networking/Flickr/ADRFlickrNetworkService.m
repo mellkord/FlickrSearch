@@ -48,7 +48,6 @@ static NSURL *kFlickrBaseURL = nil;
 
 - (void)addParametersToURLComponents:(NSURLComponents *)urlComponents
 {
-    ///TODO move string to constants
     urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:kApiKeyQueryKey value:self.apiKey]];
     urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:kFormatQueryKey value:kFormatQueryValue]];
     urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:kCallbackQueryKey value:kCallbackQueryValue]];
@@ -69,3 +68,5 @@ static NSURL *kFlickrBaseURL = nil;
 
     return photoResource;
 }
+
+@end

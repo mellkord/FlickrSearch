@@ -12,9 +12,12 @@
 		AF1302969C389C0E575E8EA4 /* ADRNetworkResource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF130DACECB0109566874518 /* ADRNetworkResource.m */; };
 		AF1302A4478C78325E7E1BCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF13092CFD8EDBE7E9420A36 /* LaunchScreen.storyboard */; };
 		AF1302AE3D03E46EB38022B7 /* ADRMockNetworkClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AF130BBB982BA011D6DF787E /* ADRMockNetworkClient.m */; };
+		AF130322BDE475038DEA2E87 /* ADRSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1304BA86E2E5F9DD759D62 /* ADRSearchResultsViewController.m */; };
 		AF13039232A33513F7E269AA /* ADRNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1303B24AE77D0EB5AB4DD7 /* ADRNetworkService.m */; };
 		AF13054928BE530A8A51C08E /* ADRFlickrNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1303DC2DF852D5F71ADF74 /* ADRFlickrNetworkService.m */; };
 		AF1306BF4996845315F998F9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF1304F33EC09D8A4D99062D /* Info.plist */; };
+		AF1306C5F5B5A82C424F142A /* ADRSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF13038FA348D4DB1DFDA8A1 /* ADRSearchViewController.m */; };
+		AF1308504427103E7409B162 /* ADRSearchHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF130DD98E46FF3079339D4E /* ADRSearchHistoryViewController.m */; };
 		AF1308B9A46729EE1C68EE95 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF1307BDE1EE2DB8F6B81288 /* Info.plist */; };
 		AF130921069C6E9400F878B8 /* FlickrSearchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF130B2FC9F744B766E02751 /* FlickrSearchTests.m */; };
 		AF130AB01D2429F22B3D6555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF130A47D5F3B0096809F347 /* Assets.xcassets */; };
@@ -36,12 +39,14 @@
 
 /* Begin PBXFileReference section */
 		AF130370111796C9256C9906 /* ADRFlickrPhotoResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrPhotoResource.h; sourceTree = "<group>"; };
+		AF13038FA348D4DB1DFDA8A1 /* ADRSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRSearchViewController.m; sourceTree = "<group>"; };
 		AF1303B24AE77D0EB5AB4DD7 /* ADRNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRNetworkService.m; sourceTree = "<group>"; };
 		AF1303C0162E5420D83D4644 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AF1303DC2DF852D5F71ADF74 /* ADRFlickrNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrNetworkService.m; sourceTree = "<group>"; };
 		AF130408FFF4B0DF767C77BA /* ADRNetworkClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRNetworkClient.m; sourceTree = "<group>"; };
 		AF130427DAA1A8A47FAF22FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF13045C5D2EF718D1404873 /* ADRFlickrPhotoResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrPhotoResource.m; sourceTree = "<group>"; };
+		AF1304BA86E2E5F9DD759D62 /* ADRSearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRSearchResultsViewController.m; sourceTree = "<group>"; };
 		AF1304EC0863C14B0623A788 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF1304F33EC09D8A4D99062D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		AF1306F9524CCF05B8ED79CF /* ADRFlickrNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrNetworkService.h; sourceTree = "<group>"; };
@@ -52,14 +57,18 @@
 		AF130A47D5F3B0096809F347 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF130A7A1C9563E8E936F274 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AF130AB938809ADC87A725C4 /* ADRMockNetworkClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRMockNetworkClient.h; sourceTree = "<group>"; };
+		AF130ADAACE9B6525B6D21B8 /* ADRSearchHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRSearchHistoryViewController.h; sourceTree = "<group>"; };
 		AF130AEFD0CC9EDC8C723FDA /* ADRNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRNetworkService.h; sourceTree = "<group>"; };
 		AF130B2FC9F744B766E02751 /* FlickrSearchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlickrSearchTests.m; sourceTree = "<group>"; };
+		AF130BA07612FAFF52DF8FA1 /* ADRSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRSearchViewController.h; sourceTree = "<group>"; };
 		AF130BB6C512A271E56FDD64 /* ADRFlickrPhotoResourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrPhotoResourceProtocol.h; sourceTree = "<group>"; };
 		AF130BBB982BA011D6DF787E /* ADRMockNetworkClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRMockNetworkClient.m; sourceTree = "<group>"; };
 		AF130C88DFBE66B20343F0DC /* ADRNetworkClientProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRNetworkClientProtocol.h; sourceTree = "<group>"; };
 		AF130CA3059EC202243016E9 /* FlickrSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF130CE0FA58702B26F67532 /* ADRSearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRSearchResultsViewController.h; sourceTree = "<group>"; };
 		AF130D4987147B06DAA5698D /* ADRNetworkResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRNetworkResource.h; sourceTree = "<group>"; };
 		AF130DACECB0109566874518 /* ADRNetworkResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRNetworkResource.m; sourceTree = "<group>"; };
+		AF130DD98E46FF3079339D4E /* ADRSearchHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRSearchHistoryViewController.m; sourceTree = "<group>"; };
 		AF130DEB647FAC90E1C181B0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AF130E317CB7D34C20BA279F /* FlickrSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF130F85DDDC55FCB9426AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,6 +101,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AF1304DEA143175867BEF43D /* SearchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				AF130BA07612FAFF52DF8FA1 /* ADRSearchViewController.h */,
+				AF13038FA348D4DB1DFDA8A1 /* ADRSearchViewController.m */,
+			);
+			path = SearchScreen;
+			sourceTree = "<group>";
+		};
 		AF13069F92D7293E52AC3E75 /* FlickrSearch */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +123,8 @@
 				AF130DEB647FAC90E1C181B0 /* ViewController.h */,
 				AF13080D9B477D54CB11E9A5 /* ViewController.m */,
 				AF130D03B5E2412D031983EA /* Networking */,
+				AF130BE07B9BABBBD6F09F22 /* Logic */,
+				AF130D4A82AC99C2F2717B3C /* UI */,
 			);
 			path = FlickrSearch;
 			sourceTree = "<group>";
@@ -130,6 +150,31 @@
 				AF130DACECB0109566874518 /* ADRNetworkResource.m */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		AF130B37CE4CB09CCD6C04E9 /* SearchHistoryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				AF130ADAACE9B6525B6D21B8 /* ADRSearchHistoryViewController.h */,
+				AF130DD98E46FF3079339D4E /* ADRSearchHistoryViewController.m */,
+			);
+			path = SearchHistoryScreen;
+			sourceTree = "<group>";
+		};
+		AF130BE07B9BABBBD6F09F22 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		AF130C2890412B7694E71C5B /* SearchResultsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				AF130CE0FA58702B26F67532 /* ADRSearchResultsViewController.h */,
+				AF1304BA86E2E5F9DD759D62 /* ADRSearchResultsViewController.m */,
+			);
+			path = SearchResultsScreen;
 			sourceTree = "<group>";
 		};
 		AF130CA4A4B1A19A9CEA09A7 /* Core */ = {
@@ -162,6 +207,16 @@
 				AF1308C1115DCDFAE55799B6 /* Flickr */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		AF130D4A82AC99C2F2717B3C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				AF1304DEA143175867BEF43D /* SearchScreen */,
+				AF130C2890412B7694E71C5B /* SearchResultsScreen */,
+				AF130B37CE4CB09CCD6C04E9 /* SearchHistoryScreen */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		AF130DA68A7B503E652152DC = {
@@ -289,6 +344,9 @@
 				AF1302969C389C0E575E8EA4 /* ADRNetworkResource.m in Sources */,
 				AF13054928BE530A8A51C08E /* ADRFlickrNetworkService.m in Sources */,
 				AF130D493A764EB7AF84E371 /* ADRFlickrPhotoResource.m in Sources */,
+				AF1306C5F5B5A82C424F142A /* ADRSearchViewController.m in Sources */,
+				AF1308504427103E7409B162 /* ADRSearchHistoryViewController.m in Sources */,
+				AF130322BDE475038DEA2E87 /* ADRSearchResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
