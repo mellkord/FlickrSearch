@@ -5,6 +5,10 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ADRSearchScreenViewModelProtocol;
+
 @interface ADRSearchViewController : UIViewController
+
+- (nullable instancetype)initWithViewModel:(nonnull NSObject<ADRSearchScreenViewModelProtocol> *)viewModel;
 
 @end

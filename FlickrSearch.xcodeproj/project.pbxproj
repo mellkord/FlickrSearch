@@ -82,6 +82,7 @@
 		AF130A7A1C9563E8E936F274 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AF130AB938809ADC87A725C4 /* ADRMockNetworkClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRMockNetworkClient.h; sourceTree = "<group>"; };
 		AF130ADAACE9B6525B6D21B8 /* ADRSearchHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRSearchHistoryViewController.h; sourceTree = "<group>"; };
+		AF130ADACD1644B61314D1C9 /* ADRSearchScreenViewModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRSearchScreenViewModelProtocol.h; sourceTree = "<group>"; };
 		AF130AEFD0CC9EDC8C723FDA /* ADRNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRNetworkService.h; sourceTree = "<group>"; };
 		AF130B1B6D8FC4E9D01258EC /* ADRFlickrSearchResultsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrSearchResultsViewModel.h; sourceTree = "<group>"; };
 		AF130B2FC9F744B766E02751 /* FlickrSearchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlickrSearchTests.m; sourceTree = "<group>"; };
@@ -145,6 +146,7 @@
 			children = (
 				AF13011B757973D1361C457A /* ADRFlickrSearchViewModel.m */,
 				AF130F66560892A09B45F0D0 /* ADRFlickrSearchViewModel.h */,
+				AF130ADACD1644B61314D1C9 /* ADRSearchScreenViewModelProtocol.h */,
 			);
 			path = SearchScreenViewModels;
 			sourceTree = "<group>";

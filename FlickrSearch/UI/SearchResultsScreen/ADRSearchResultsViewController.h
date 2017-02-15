@@ -7,4 +7,6 @@
 
 @interface ADRSearchResultsViewController : UICollectionViewController
 
+- (nullable instancetype)initWithViewModel:(nonnull ADRFlickrFeedViewModel *)viewModel;
+
 @end

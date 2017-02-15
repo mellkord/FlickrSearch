@@ -4,7 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ADRSearchScreenViewModelProtocol.h"
 
 
-@interface ADRFlickrSearchViewModel : NSObject
+@interface ADRFlickrSearchViewModel : NSObject <ADRSearchScreenViewModelProtocol>
 @end

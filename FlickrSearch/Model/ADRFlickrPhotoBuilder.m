@@ -34,7 +34,7 @@
         return nil;
     }
 
-    [photosArray bk_map:^ADRFlickrPhoto*(NSDictionary *photoDict) {
+    NSArray<ADRFlickrPhoto *> *photos = [photosArray bk_map:^ADRFlickrPhoto*(NSDictionary *photoDict) {
         NSUInteger identifier = ((NSNumber *)photosDict[@"id"]).unsignedIntegerValue;
 
         if (identifier == 0)
@@ -79,7 +79,8 @@
 
         return [[ADRFlickrPhoto alloc] initWithIdentifier:identifier title:title owner:owner secret:secret server:server farm:farm];
     }];
-    return nil;
+
+    return photos;
 }
 
 + (NSArray<ADRFlickrPhoto *> *)photosFromXMLData:(NSData *)xmlData
