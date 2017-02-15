@@ -9,7 +9,7 @@
 
 @implementation ADRFlickrPhotoResource
 
-- (NSURLSessionTask *)searchForString:(NSString *)searchString completion:(ADRNetworkClientCompletionBlock)completion
+- (NSURLSessionTask *)searchPhotosForString:(NSString *)searchString completion:(ADRNetworkClientCompletionBlock)completion
 {
     NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:self.networkService.baseURL resolvingAgainstBaseURL:YES];
     urlComponents.queryItems = @[[NSURLQueryItem queryItemWithName:@"method" value:@"flickr.photos.search"]];

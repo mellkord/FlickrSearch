@@ -13,14 +13,22 @@
 		AF1302A4478C78325E7E1BCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF13092CFD8EDBE7E9420A36 /* LaunchScreen.storyboard */; };
 		AF1302AE3D03E46EB38022B7 /* ADRMockNetworkClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AF130BBB982BA011D6DF787E /* ADRMockNetworkClient.m */; };
 		AF130322BDE475038DEA2E87 /* ADRSearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1304BA86E2E5F9DD759D62 /* ADRSearchResultsViewController.m */; };
+		AF13037D48B658B95917F355 /* ADRFlickrSearchPhotoStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1302FCED23CBA6918562DA /* ADRFlickrSearchPhotoStorage.m */; };
+		AF130383D597E9F850C4E4C4 /* ADRFlickrSearchLoadingCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1300A84EB558B2FBD4999E /* ADRFlickrSearchLoadingCellViewModel.m */; };
 		AF13039232A33513F7E269AA /* ADRNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1303B24AE77D0EB5AB4DD7 /* ADRNetworkService.m */; };
+		AF13041856FE9C14C73FA2F2 /* ADRFlickrSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF13011B757973D1361C457A /* ADRFlickrSearchViewModel.m */; };
+		AF130479446D2010C414DCED /* ADRFlickrSearchHistoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF13063B3EA34F94766DD25E /* ADRFlickrSearchHistoryViewModel.m */; };
 		AF13054928BE530A8A51C08E /* ADRFlickrNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1303DC2DF852D5F71ADF74 /* ADRFlickrNetworkService.m */; };
+		AF13068A46AAEE8E23F617AA /* ADRFlickrPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF130E04175134524936B318 /* ADRFlickrPhoto.m */; };
 		AF1306BF4996845315F998F9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF1304F33EC09D8A4D99062D /* Info.plist */; };
 		AF1306C5F5B5A82C424F142A /* ADRSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF13038FA348D4DB1DFDA8A1 /* ADRSearchViewController.m */; };
+		AF130773B88B07A68E649C90 /* ADRFlickrSearchImageCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF13016F0879E40433BB6D4A /* ADRFlickrSearchImageCellViewModel.m */; };
 		AF1308504427103E7409B162 /* ADRSearchHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF130DD98E46FF3079339D4E /* ADRSearchHistoryViewController.m */; };
 		AF1308B9A46729EE1C68EE95 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF1307BDE1EE2DB8F6B81288 /* Info.plist */; };
 		AF130921069C6E9400F878B8 /* FlickrSearchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF130B2FC9F744B766E02751 /* FlickrSearchTests.m */; };
+		AF1309FE08F8DBA7F0FD51E4 /* ADRFlickrSearchResultsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1304B48C4AF6F56612E403 /* ADRFlickrSearchResultsViewModel.m */; };
 		AF130AB01D2429F22B3D6555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF130A47D5F3B0096809F347 /* Assets.xcassets */; };
+		AF130AD590D25200404ABBCC /* ADRFlickrPhotoBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1303922D68CEC9C35E7B78 /* ADRFlickrPhotoBuilder.m */; };
 		AF130B9D3D1DE89E883E2939 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF130427DAA1A8A47FAF22FA /* main.m */; };
 		AF130D21F75D3D41A97F282D /* ADRNetworkClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AF130408FFF4B0DF767C77BA /* ADRNetworkClient.m */; };
 		AF130D493A764EB7AF84E371 /* ADRFlickrPhotoResource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF13045C5D2EF718D1404873 /* ADRFlickrPhotoResource.m */; };
@@ -38,18 +46,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF1300A84EB558B2FBD4999E /* ADRFlickrSearchLoadingCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrSearchLoadingCellViewModel.m; sourceTree = "<group>"; };
+		AF13011B757973D1361C457A /* ADRFlickrSearchViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrSearchViewModel.m; sourceTree = "<group>"; };
+		AF13016F0879E40433BB6D4A /* ADRFlickrSearchImageCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrSearchImageCellViewModel.m; sourceTree = "<group>"; };
+		AF1301BC49AD51586C89AC3F /* ADRFlickrSearchPhotoStorageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrSearchPhotoStorageDelegate.h; sourceTree = "<group>"; };
+		AF1302685EDF755C14FB7435 /* ADRFlickrPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrPhoto.h; sourceTree = "<group>"; };
+		AF1302FCED23CBA6918562DA /* ADRFlickrSearchPhotoStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrSearchPhotoStorage.m; sourceTree = "<group>"; };
 		AF130370111796C9256C9906 /* ADRFlickrPhotoResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrPhotoResource.h; sourceTree = "<group>"; };
 		AF13038FA348D4DB1DFDA8A1 /* ADRSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRSearchViewController.m; sourceTree = "<group>"; };
+		AF1303922D68CEC9C35E7B78 /* ADRFlickrPhotoBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrPhotoBuilder.m; sourceTree = "<group>"; };
 		AF1303B24AE77D0EB5AB4DD7 /* ADRNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRNetworkService.m; sourceTree = "<group>"; };
 		AF1303C0162E5420D83D4644 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AF1303DC2DF852D5F71ADF74 /* ADRFlickrNetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrNetworkService.m; sourceTree = "<group>"; };
+		AF1303F5094D8085276F505F /* ADRFlickrSearchImageCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrSearchImageCellViewModel.h; sourceTree = "<group>"; };
 		AF130408FFF4B0DF767C77BA /* ADRNetworkClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRNetworkClient.m; sourceTree = "<group>"; };
 		AF130427DAA1A8A47FAF22FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF13045C5D2EF718D1404873 /* ADRFlickrPhotoResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrPhotoResource.m; sourceTree = "<group>"; };
+		AF13049DF8981278ACC88FD5 /* ADRFlickrSearchHistoryViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrSearchHistoryViewModel.h; sourceTree = "<group>"; };
+		AF1304B48C4AF6F56612E403 /* ADRFlickrSearchResultsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrSearchResultsViewModel.m; sourceTree = "<group>"; };
 		AF1304BA86E2E5F9DD759D62 /* ADRSearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRSearchResultsViewController.m; sourceTree = "<group>"; };
 		AF1304EC0863C14B0623A788 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF1304F33EC09D8A4D99062D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		AF13063B3EA34F94766DD25E /* ADRFlickrSearchHistoryViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrSearchHistoryViewModel.m; sourceTree = "<group>"; };
 		AF1306F9524CCF05B8ED79CF /* ADRFlickrNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrNetworkService.h; sourceTree = "<group>"; };
+		AF1306FA09C487E89D164566 /* ADRFlickrSearchLoadingCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrSearchLoadingCellViewModel.h; sourceTree = "<group>"; };
 		AF1307BDE1EE2DB8F6B81288 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		AF1307EAFF343F3E9C6140B6 /* ADRNetworkClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRNetworkClient.h; sourceTree = "<group>"; };
 		AF13080D9B477D54CB11E9A5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -59,6 +79,7 @@
 		AF130AB938809ADC87A725C4 /* ADRMockNetworkClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRMockNetworkClient.h; sourceTree = "<group>"; };
 		AF130ADAACE9B6525B6D21B8 /* ADRSearchHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRSearchHistoryViewController.h; sourceTree = "<group>"; };
 		AF130AEFD0CC9EDC8C723FDA /* ADRNetworkService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRNetworkService.h; sourceTree = "<group>"; };
+		AF130B1B6D8FC4E9D01258EC /* ADRFlickrSearchResultsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrSearchResultsViewModel.h; sourceTree = "<group>"; };
 		AF130B2FC9F744B766E02751 /* FlickrSearchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlickrSearchTests.m; sourceTree = "<group>"; };
 		AF130BA07612FAFF52DF8FA1 /* ADRSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRSearchViewController.h; sourceTree = "<group>"; };
 		AF130BB6C512A271E56FDD64 /* ADRFlickrPhotoResourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrPhotoResourceProtocol.h; sourceTree = "<group>"; };
@@ -70,7 +91,11 @@
 		AF130DACECB0109566874518 /* ADRNetworkResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRNetworkResource.m; sourceTree = "<group>"; };
 		AF130DD98E46FF3079339D4E /* ADRSearchHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRSearchHistoryViewController.m; sourceTree = "<group>"; };
 		AF130DEB647FAC90E1C181B0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		AF130E04175134524936B318 /* ADRFlickrPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADRFlickrPhoto.m; sourceTree = "<group>"; };
 		AF130E317CB7D34C20BA279F /* FlickrSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF130EE8608A5BCDF8552689 /* ADRFlickrSearchPhotoStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrSearchPhotoStorage.h; sourceTree = "<group>"; };
+		AF130EFA07C75E002CEB713D /* ADRFlickrPhotoBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrPhotoBuilder.h; sourceTree = "<group>"; };
+		AF130F66560892A09B45F0D0 /* ADRFlickrSearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADRFlickrSearchViewModel.h; sourceTree = "<group>"; };
 		AF130F85DDDC55FCB9426AC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +117,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF130251CE1262267D07D890 /* SearchHistoryScreenViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AF13063B3EA34F94766DD25E /* ADRFlickrSearchHistoryViewModel.m */,
+				AF13049DF8981278ACC88FD5 /* ADRFlickrSearchHistoryViewModel.h */,
+			);
+			path = SearchHistoryScreenViewModels;
+			sourceTree = "<group>";
+		};
+		AF13031FF82D13784C2DAB59 /* SearchScreenViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AF13011B757973D1361C457A /* ADRFlickrSearchViewModel.m */,
+				AF130F66560892A09B45F0D0 /* ADRFlickrSearchViewModel.h */,
+			);
+			path = SearchScreenViewModels;
+			sourceTree = "<group>";
+		};
 		AF13039556EDE9847BA4E749 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,8 +168,43 @@
 				AF130D03B5E2412D031983EA /* Networking */,
 				AF130BE07B9BABBBD6F09F22 /* Logic */,
 				AF130D4A82AC99C2F2717B3C /* UI */,
+				AF1308A2BDE02860AFCDBA3B /* Model */,
 			);
 			path = FlickrSearch;
+			sourceTree = "<group>";
+		};
+		AF1307A6FCF03E078772EFE9 /* SearchResultsScreenViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AF1304B48C4AF6F56612E403 /* ADRFlickrSearchResultsViewModel.m */,
+				AF130B1B6D8FC4E9D01258EC /* ADRFlickrSearchResultsViewModel.h */,
+				AF13016F0879E40433BB6D4A /* ADRFlickrSearchImageCellViewModel.m */,
+				AF1303F5094D8085276F505F /* ADRFlickrSearchImageCellViewModel.h */,
+				AF1300A84EB558B2FBD4999E /* ADRFlickrSearchLoadingCellViewModel.m */,
+				AF1306FA09C487E89D164566 /* ADRFlickrSearchLoadingCellViewModel.h */,
+			);
+			path = SearchResultsScreenViewModels;
+			sourceTree = "<group>";
+		};
+		AF1307AEB9FD883D76E9E7A1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AF130251CE1262267D07D890 /* SearchHistoryScreenViewModels */,
+				AF1307A6FCF03E078772EFE9 /* SearchResultsScreenViewModels */,
+				AF13031FF82D13784C2DAB59 /* SearchScreenViewModels */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AF1308A2BDE02860AFCDBA3B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AF130E04175134524936B318 /* ADRFlickrPhoto.m */,
+				AF1302685EDF755C14FB7435 /* ADRFlickrPhoto.h */,
+				AF1303922D68CEC9C35E7B78 /* ADRFlickrPhotoBuilder.m */,
+				AF130EFA07C75E002CEB713D /* ADRFlickrPhotoBuilder.h */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AF1308C1115DCDFAE55799B6 /* Flickr */ = {
@@ -152,6 +230,16 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		AF130B275D6B9EF4B738073C /* PhotoStorage */ = {
+			isa = PBXGroup;
+			children = (
+				AF1302FCED23CBA6918562DA /* ADRFlickrSearchPhotoStorage.m */,
+				AF130EE8608A5BCDF8552689 /* ADRFlickrSearchPhotoStorage.h */,
+				AF1301BC49AD51586C89AC3F /* ADRFlickrSearchPhotoStorageDelegate.h */,
+			);
+			path = PhotoStorage;
+			sourceTree = "<group>";
+		};
 		AF130B37CE4CB09CCD6C04E9 /* SearchHistoryScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +252,8 @@
 		AF130BE07B9BABBBD6F09F22 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				AF1307AEB9FD883D76E9E7A1 /* ViewModels */,
+				AF130B275D6B9EF4B738073C /* PhotoStorage */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -347,6 +437,14 @@
 				AF1306C5F5B5A82C424F142A /* ADRSearchViewController.m in Sources */,
 				AF1308504427103E7409B162 /* ADRSearchHistoryViewController.m in Sources */,
 				AF130322BDE475038DEA2E87 /* ADRSearchResultsViewController.m in Sources */,
+				AF130479446D2010C414DCED /* ADRFlickrSearchHistoryViewModel.m in Sources */,
+				AF1309FE08F8DBA7F0FD51E4 /* ADRFlickrSearchResultsViewModel.m in Sources */,
+				AF13041856FE9C14C73FA2F2 /* ADRFlickrSearchViewModel.m in Sources */,
+				AF130773B88B07A68E649C90 /* ADRFlickrSearchImageCellViewModel.m in Sources */,
+				AF130383D597E9F850C4E4C4 /* ADRFlickrSearchLoadingCellViewModel.m in Sources */,
+				AF13037D48B658B95917F355 /* ADRFlickrSearchPhotoStorage.m in Sources */,
+				AF13068A46AAEE8E23F617AA /* ADRFlickrPhoto.m in Sources */,
+				AF130AD590D25200404ABBCC /* ADRFlickrPhotoBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

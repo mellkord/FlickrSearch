@@ -14,7 +14,7 @@
 /// @param searchString search string
 /// @param completion block to execute after request finish execution
 /// @return instance of session task associated with search
-- (NSURLSessionTask *)searchForString:(NSString *)searchString completion:(ADRNetworkClientCompletionBlock)completion;
+- (NSURLSessionTask *)searchPhotosForString:(NSString *)searchString completion:(ADRNetworkClientCompletionBlock)completion;
 
 /// Get information about photo on flickr.com by provided photo identifier
 /// @param photoId identifier of photo
