@@ -1,0 +1,20 @@
+//
+//  FlickrSearch.pch
+//  FlickrSearch
+//
+//  Created by dmitrii.aitov@philips.com on 15/02/17.
+//  Copyright © 2017 Dmitrii Aitov. All rights reserved.
+//
+
+#import "DDLog.h"
+
+#define WeakRef(identifier) __weak __typeof(identifier) weak_ ## identifier = identifier
+#define StrongRef(identifier) __strong __typeof(weak_ ## identifier) identifier = weak_ ## identifier
+#define weakself WeakRef(self)
+#define strongself StrongRef(self)
+
+#if DEBUG
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#else
+static const DDLogLevel ddLogLevel = DDLogLevelWarning;
+#endif

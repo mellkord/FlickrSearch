@@ -4,13 +4,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ADRSearchResultsLoadingCellViewModelProtocol.h"
 
-///TODO Docs
-@interface ADRFlickrSearchLoadingCellViewModel : NSObject
+///Flickr.com search result loading cell viewmodel
+@interface ADRFlickrSearchLoadingCellViewModel : NSObject <ADRSearchResultsLoadingCellViewModelProtocol>
 
-@property (nonatomic, assign, readonly, getter=isLoading) BOOL loading;
-@property (nonatomic, copy, readonly, nullable) NSString *errorMessage;
-
+/// Initialization method of ADRFlickrSearchLoadingCellViewModel
+/// @param errorMessage error message
+/// @return new instance of ADRFlickrSearchLoadingCellViewModel
 - (nullable instancetype)initWithErrorMessage:(nullable NSString *)errorMessage;
+
+///Made init and new unavailable to avoid creation without mandatory parameters
++ (nullable instancetype)new NS_UNAVAILABLE;
+- (nullable instancetype)init NS_UNAVAILABLE;
 
 @end

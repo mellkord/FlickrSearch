@@ -32,7 +32,7 @@
 
 - (NSURL *)imageURL
 {
-    return [NSURL URLWithString:[NSString stringWithFormat:@"https://farm%lu.static.flicr.com/%lu/%lu_%@.jpg", self.farm, self.server, self.identifier, self.secret]];
+    return [NSURL URLWithString:[NSString stringWithFormat:@"https://farm%lu.static.flickr.com/%lu/%lu_%@.jpg", self.farm, self.server, self.identifier, self.secret]];
 
 }
 

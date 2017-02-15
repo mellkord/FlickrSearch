@@ -9,7 +9,7 @@
 
 
 @implementation ADRFlickrPhotoBuilder
-
+//TODO move all string to constants section
 + (NSArray<ADRFlickrPhoto *> *)photosFromJSONData:(NSData *)jsonData
 {
     NSError *jsonParseError = nil;
@@ -35,42 +35,42 @@
     }
 
     NSArray<ADRFlickrPhoto *> *photos = [photosArray bk_map:^ADRFlickrPhoto*(NSDictionary *photoDict) {
-        NSUInteger identifier = ((NSNumber *)photosDict[@"id"]).unsignedIntegerValue;
+        NSUInteger identifier = ((NSString *)photoDict[@"id"]).longLongValue;
 
         if (identifier == 0)
         {
             return nil;
         }
 
-        NSUInteger server = ((NSNumber *)photosDict[@"server"]).unsignedIntegerValue;
+        NSUInteger server = ((NSString *)photoDict[@"server"]).longLongValue;
 
         if (server == 0)
         {
             return nil;
         }
 
-        NSUInteger farm = ((NSNumber *)photosDict[@"farm"]).unsignedIntegerValue;
+        NSUInteger farm = ((NSNumber *)photoDict[@"farm"]).unsignedIntegerValue;
 
         if (farm == 0)
         {
             return nil;
         }
 
-        NSString *owner = photosDict[@"owner"];
+        NSString *owner = photoDict[@"owner"];
 
         if (!owner)
         {
             return nil;
         }
 
-        NSString *secret = photosDict[@"secret"];
+        NSString *secret = photoDict[@"secret"];
 
         if (!secret)
         {
             return nil;
         }
 
-        NSString *title = photosDict[@"title"];
+        NSString *title = photoDict[@"title"];
 
         if (!title)
         {

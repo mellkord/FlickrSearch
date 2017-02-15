@@ -12,9 +12,11 @@
 
 /// Search photos on flickr.com by provided search string
 /// @param searchString search string
+/// @param page current page to fetch
+/// @param photosPerPage number of photos per page
 /// @param completion block to execute after request finish execution
 /// @return instance of session task associated with search
-- (NSURLSessionTask *)searchPhotosForString:(NSString *)searchString completion:(ADRNetworkClientCompletionBlock)completion;
+- (NSURLSessionTask *)searchPhotosForString:(NSString *)searchString page:(NSUInteger)page photosPerPage:(NSUInteger)photosPerPage completion:(ADRNetworkClientCompletionBlock)completion;
 
 /// Get information about photo on flickr.com by provided photo identifier
 /// @param photoId identifier of photo

@@ -7,10 +7,10 @@
 #import "ADRNetworkResource.h"
 #import "ADRFlickrPhotoResourceProtocol.h"
 
-///TODO Docs
+///Flickr.com photo resource
 @interface ADRFlickrPhotoResource : ADRNetworkResource <ADRFlickrPhotoResourceProtocol>
 
-///
+///Made init and new unavailable to avoid creation without mandatory parameters
 + (nullable instancetype)new NS_UNAVAILABLE;
 - (nullable instancetype)init NS_UNAVAILABLE;
 

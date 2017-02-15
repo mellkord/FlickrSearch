@@ -9,15 +9,17 @@
 
 @implementation ADRFlickrPhotoResource
 
-- (NSURLSessionTask *)searchPhotosForString:(NSString *)searchString completion:(ADRNetworkClientCompletionBlock)completion
+- (NSURLSessionTask *)searchPhotosForString:(NSString *)searchString page:(NSUInteger)page photosPerPage:(NSUInteger)photosPerPage completion:(ADRNetworkClientCompletionBlock)completion;
 {
     NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:self.networkService.baseURL resolvingAgainstBaseURL:YES];
     urlComponents.queryItems = @[[NSURLQueryItem queryItemWithName:@"method" value:@"flickr.photos.search"]];
     urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:@"text" value:searchString]];
+    urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:@"page" value:[NSString stringWithFormat:@"%lu", page]]];
+    urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:@"per_page" value:[NSString stringWithFormat:@"%lu", photosPerPage]]];
 
     [self.networkService addParametersToURLComponents:urlComponents];
 
-    NSURLRequest *request = [NSURLRequest requestWithURL:urlComponents.URL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
+    NSURLRequest *request = [NSURLRequest requestWithURL:urlComponents.URL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10 * 1000];
 
     return [self.networkService.networkCLient executeRequest:request completion:completion];
 }
@@ -42,7 +44,7 @@
 
 - (NSURLSessionTask *)getImageWithURL:(NSURL *)url downloadCompletion:(ADRNetworkClientDownloadCompletionBlock)downloadCompletion
 {
-    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10 * 1000];
     return [self.networkService.networkCLient executeRequest:request downloadCompletion:downloadCompletion];
 }
 

@@ -6,6 +6,6 @@
 #import <Foundation/Foundation.h>
 #import "ADRSearchScreenViewModelProtocol.h"
 
-
+///Flickr.com search screen view model
 @interface ADRFlickrSearchViewModel : NSObject <ADRSearchScreenViewModelProtocol>
 @end

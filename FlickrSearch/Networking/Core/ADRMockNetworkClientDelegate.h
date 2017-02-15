@@ -5,33 +5,33 @@
 
 #import <Foundation/Foundation.h>
 
-///
+///Protocol describing delegate for mocked network client
 @protocol ADRMockNetworkClientDelegate <NSObject>
 @required
 
-///
+/// Provide data for specified request
 /// @param request
-/// @return
+/// @return data which should be passed to client
 - (NSData *)dataForRequest:(NSURLRequest *)request;
 
-///
+/// Provide responce for specified request
 /// @param request
-/// @return
+/// @return responce object which should be passed to client
 - (NSURLResponse *)responseForRequest:(NSURLRequest *)request;
 
-///
+/// Provide error for specified request
 /// @param request
-/// @return
+/// @return error object which should be passed to client
 - (NSError *)errorForRequest:(NSURLRequest *)request;
 
-///
-/// @param request
-/// @return
+/// Provide progress for specified download request
+/// @param request download request
+/// @return progress which should be passed to client
 - (float)progressRorRequest:(NSURLRequest *)request;
 
-///
-/// @param request
-/// @return
+/// Provide file url for specified download request
+/// @param request download request
+/// @return file url which should be passed to client
 - (NSURL *)urlForRequest:(NSURLRequest *)request;
 
 @end

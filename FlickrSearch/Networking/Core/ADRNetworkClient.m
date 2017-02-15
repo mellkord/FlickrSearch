@@ -95,7 +95,7 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     ADRNetworkClientProgressBlock progressBlock = self.progresses[downloadTask.originalRequest];
     if (progressBlock)
     {
-        progressBlock(totalBytesWritten / totalBytesExpectedToWrite);
+        progressBlock((float)totalBytesWritten / (float)totalBytesExpectedToWrite);
     }
 }
 

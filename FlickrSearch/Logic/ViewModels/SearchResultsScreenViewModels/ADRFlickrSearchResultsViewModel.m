@@ -17,6 +17,7 @@
 @end
 
 @implementation ADRFlickrSearchResultsViewModel
+@synthesize collectionView = _collectionView;
 
 - (instancetype)initWithSearchString:(NSString *)searchString photoStorage:(ADRFlickrSearchPhotoStorage *)storage
 {
@@ -44,7 +45,7 @@
 
     if (!image)
     {
-        image = [UIImage imageNamed:@"downloading_placeholder"];
+        image = [UIImage imageNamed:@"Downloading"];
     }
 
     return [[ADRFlickrSearchImageCellViewModel alloc] initWithPhoto:photo image:image];
@@ -53,6 +54,21 @@
 - (ADRFlickrSearchLoadingCellViewModel *)modelForLoadingCell
 {
     return [[ADRFlickrSearchLoadingCellViewModel alloc] initWithErrorMessage:nil];
+}
+
+- (NSUInteger)photosCount
+{
+    return self.storage.photosCount;
+}
+
+- (void)didReceivePhotosForIndexesInRange:(NSRange)range
+{
+    [self.collectionView reloadData];
+}
+
+- (void)didReceiveImageForPhotoWithIndex:(NSUInteger)index
+{
+    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:index inSection:0]]];
 }
 
 @end

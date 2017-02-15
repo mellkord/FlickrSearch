@@ -15,6 +15,7 @@
 
 @property (nonatomic, weak, readwrite, nullable) NSObject<ADRFlickrSearchPhotoStorageDelegate> *delegate;
 @property (nonatomic, copy, readonly, nonnull) NSString *searchString;
+@property (nonatomic, assign, readonly) NSUInteger photosCount;
 
 
 - (nullable instancetype)initWithSearchString:(nonnull NSString *)searchString

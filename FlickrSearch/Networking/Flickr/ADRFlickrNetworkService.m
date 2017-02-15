@@ -25,6 +25,7 @@ static NSURL *kFlickrBaseURL = nil;
 @end
 
 @implementation ADRFlickrNetworkService
+@synthesize photoResource = _photoResource;
 
 + (void)initialize
 {
@@ -60,13 +61,12 @@ static NSURL *kFlickrBaseURL = nil;
 
 - (NSObject <ADRFlickrPhotoResourceProtocol> *)photoResource
 {
-    static ADRFlickrPhotoResource *photoResource = nil;
-    if (!photoResource)
+    if (!_photoResource)
     {
-        photoResource = [[ADRFlickrPhotoResource alloc] initWithService:self];
+        _photoResource = [[ADRFlickrPhotoResource alloc] initWithService:self];
     }
 
-    return photoResource;
+    return _photoResource;
 }
 
 @end

@@ -26,18 +26,28 @@
 - (BOOL)historyButtonEnable
 {
     //TODO check local storage
-    return NO;
+    return YES;
 }
 
-- (BOOL)historyButtonVisiable
+- (BOOL)historyButtonVisible
 {
     //TODO check local storage
-    return NO;
+    return YES;
 }
 
 - (UIColor *)backgroundColor
 {
     return UIColor.whiteColor;
+}
+
+- (UIImage *)backgroundImage
+{
+    return [UIImage imageNamed:@"Background"];
+}
+
+- (UIImage *)logoImage
+{
+    return [UIImage imageNamed:@"Flickr"];
 }
 
 @end

@@ -8,6 +8,7 @@
 #import "ADRFlickrSearchPhotoStorageDelegate.h"
 #import "ADRFlickrNetworkService.h"
 #import "ADRFlickrPhotoResourceProtocol.h"
+#import "ADRFlickrPhotoBuilder.h"
 
 
 static NSUInteger const kPageSize = 100;
@@ -20,7 +21,9 @@ static NSUInteger const kPageSize = 100;
 @property (nonatomic, strong, readonly, nonnull)    NSCache<NSNumber*, NSNumber*>           *indexCache;
 @property (nonatomic, strong, readonly, nonnull)    NSCache<NSNumber*, ADRFlickrPhoto*>     *photoCache;
 @property (nonatomic, strong, readonly, nonnull)    NSCache<NSURL *, UIImage*>              *imageCache;
+@property (nonatomic, strong, readonly, nonnull)    NSCache<NSURL *, NSNumber*>             *urlCache;
 
+@property (nonatomic, assign, readwrite) NSUInteger photosCount;
 @end
 
 
@@ -36,11 +39,12 @@ static NSUInteger const kPageSize = 100;
         _searchString = searchString;
         _flickrService = flickrService;
         _delegate = delegate;
-        _currentPage = 1;
+        _currentPage = 0;
 
         _indexCache = [[NSCache alloc] init];
         _photoCache = [[NSCache alloc] init];
         _imageCache = [[NSCache alloc] init];
+        _urlCache = [[NSCache alloc] init];
 
     }
     return self;
@@ -48,11 +52,15 @@ static NSUInteger const kPageSize = 100;
 
 - (ADRFlickrPhoto *)photoByIndex:(NSUInteger)index
 {
+    if (index >= self.currentPage * kPageSize)
+    {
+        [self loadMorePhotos];
+    }
+
     NSNumber *photoIdNumber = [self.indexCache objectForKey:@(index)];
 
     if (!photoIdNumber)
     {
-        [self loadMorePhotos];
         return nil;
     }
 
@@ -72,6 +80,8 @@ static NSUInteger const kPageSize = 100;
     {
         return nil;
     }
+
+    [self.urlCache setObject:@(index) forKey:[photo imageURL]];
 
     return [self imageByURL:[photo imageURL]];
 }
@@ -108,13 +118,13 @@ static NSUInteger const kPageSize = 100;
     [self.indexCache removeAllObjects];
     [self.photoCache removeAllObjects];
     [self.imageCache removeAllObjects];
-    self.currentPage = 1;
+    self.currentPage = 0;
 }
 
 - (void)loadMorePhotos
 {
-    self.currentPage += 1;
-    [self.flickrService.photoResource searchPhotosForString:self.searchString completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+    self.currentPage++;
+    [self.flickrService.photoResource searchPhotosForString:self.searchString page:self.currentPage photosPerPage:kPageSize completion:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error)
         {
             NSLog(@"error: %@", error);
@@ -122,14 +132,29 @@ static NSUInteger const kPageSize = 100;
         }
 
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode > 201)
+        if (httpResponse.statusCode > 200)
         {
-            NSLog(@"http error with code: %d description: %@", httpResponse.statusCode, [NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]);
+            NSLog(@"http error with code: %ld description: %@", (long)httpResponse.statusCode, [NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]);
             return;
         }
 
-        NSLog(@"ALL FINE Text: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-        [self.delegate didReceivePhotosForIndexesInRange:NSMakeRange(0, 5)];
+
+        NSArray<ADRFlickrPhoto *> *photos = [ADRFlickrPhotoBuilder photosFromJSONData:data];
+
+        NSRange addedRange = NSMakeRange(self.photosCount, photos.count);
+
+        [photos enumerateObjectsUsingBlock:^(ADRFlickrPhoto *photo, NSUInteger idx, BOOL *stop) {
+            if ((NSNull *)photo == [NSNull null])
+            {
+                return;
+            }
+
+            [self.indexCache setObject:@(photo.identifier) forKey:@(self.photosCount)];
+            [self.photoCache setObject:photos[idx] forKey:@(photos[idx].identifier)];
+            self.photosCount++;
+        }];
+
+        [self.delegate didReceivePhotosForIndexesInRange:addedRange];
     }];
 }
 
@@ -145,12 +170,26 @@ static NSUInteger const kPageSize = 100;
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         if (httpResponse.statusCode > 201)
         {
-            NSLog(@"http error with code: %d description: %@", httpResponse.statusCode, [NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]);
+            NSLog(@"http error with code: %ld description: %@", (long)httpResponse.statusCode, [NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]);
             return;
         }
 
-        NSLog(@"ALL FINE Text: %@", fileUrl);
-        [self.delegate didReceiveImageForPhotoWithIndex:5];
+        if (![NSFileManager.defaultManager fileExistsAtPath:fileUrl.path])
+        {
+            NSLog(@"error file doesnt exists at url: %@", url);
+            return;
+        }
+
+        UIImage *image = [UIImage imageWithContentsOfFile:fileUrl.path];
+        if (!image)
+        {
+            NSLog(@"error couldn't create file from url: %@", url);
+            return;
+        }
+
+        [self.imageCache setObject:image forKey:url];
+
+        [self.delegate didReceiveImageForPhotoWithIndex:[self.urlCache objectForKey:url].unsignedIntegerValue];
     }];
 }
 

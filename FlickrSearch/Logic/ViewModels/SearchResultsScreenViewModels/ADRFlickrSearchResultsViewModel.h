@@ -4,19 +4,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ADRSearchResultsScreenViewModelProtocol.h"
+#import "ADRFlickrSearchPhotoStorageDelegate.h"
 
 @class ADRFlickrSearchPhotoStorage;
-@class ADRFlickrSearchImageCellViewModel;
-@class ADRFlickrSearchLoadingCellViewModel;
 
-@interface ADRFlickrSearchResultsViewModel : NSObject
+///Flickr.com photo search results view model
+@interface ADRFlickrSearchResultsViewModel : NSObject <ADRSearchResultsScreenViewModelProtocol, ADRFlickrSearchPhotoStorageDelegate>
 
-@property (nonatomic, copy, readonly, nonnull) NSString *searchString;
-@property (nonatomic, assign, readonly) NSUInteger photosCount;
-
+/// Initialization methods for ADRFlickrSearchResultsViewModel
+/// @param searchString search string
+/// @param storage photo storage
+/// @return new instance of ADRFlickrSearchResultsViewModel
 - (nullable instancetype)initWithSearchString:(nonnull NSString *)searchString photoStorage:(nonnull ADRFlickrSearchPhotoStorage *)storage;
 
-- (nullable ADRFlickrSearchImageCellViewModel *)modelForImageCellAtIndex:(NSUInteger)index;
-- (nonnull ADRFlickrSearchLoadingCellViewModel *)modelForLoadingCell;
+///Made init and new unavailable to avoid creation without mandatory parameters
++ (nullable instancetype)new NS_UNAVAILABLE;
+- (nullable instancetype)init NS_UNAVAILABLE;
 
 @end

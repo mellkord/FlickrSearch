@@ -4,92 +4,98 @@
 //
 
 #import "ADRSearchResultsViewController.h"
+#import "ADRSearchResultsScreenViewModelProtocol.h"
+#import "ADRSearchResultsImageCell.h"
+#import "ADRSearchResultsLoadingCell.h"
+
+static NSString * const kImageCellReuseIdentifier = @"ADRSearchResultsImageCell";
+static NSString * const kLoadingCellReuseIdentifier = @"ADRSearchResultsLoadingCell";
 
 @interface ADRSearchResultsViewController ()
+
+@property (nonatomic, strong, readonly, nonnull) NSObject<ADRSearchResultsScreenViewModelProtocol> *viewModel;
 
 @end
 
 @implementation ADRSearchResultsViewController
 
-static NSString * const reuseIdentifier = @"Cell";
+- (nullable instancetype)initWithViewModel:(nonnull NSObject<ADRSearchResultsScreenViewModelProtocol> *)viewModel;
+{
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.itemSize = CGSizeMake(90, 125);
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    self = [super initWithCollectionViewLayout:flowLayout];
+
+    if (self)
+    {
+        _viewModel = viewModel;
+    }
+
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
+
+    self.viewModel.collectionView = self.collectionView;
+    self.collectionView.contentInset = UIEdgeInsetsMake(10, 10, 10, 10);
+
+    [self.collectionView registerClass:[ADRSearchResultsImageCell class] forCellWithReuseIdentifier:kImageCellReuseIdentifier];
+    [self.collectionView registerClass:[ADRSearchResultsLoadingCell class] forCellWithReuseIdentifier:kLoadingCellReuseIdentifier];
+
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    self.navigationController.navigationBarHidden = NO;
 }
-*/
 
 #pragma mark <UICollectionViewDataSource>
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
 }
 
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 0;
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.viewModel.photosCount + 1;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
-    
-    return cell;
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.item < self.viewModel.photosCount)
+    {
+        ADRSearchResultsImageCell *imageCell = [collectionView dequeueReusableCellWithReuseIdentifier:kImageCellReuseIdentifier forIndexPath:indexPath];
+        return imageCell;
+    }
+    else
+    {
+        ADRSearchResultsLoadingCell *loadingCell = [collectionView dequeueReusableCellWithReuseIdentifier:kLoadingCellReuseIdentifier forIndexPath:indexPath];
+        return loadingCell;
+    }
 }
 
 #pragma mark <UICollectionViewDelegate>
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSObject<ADRSearchResultsImageCellViewModelProtocol> *imageCellModel = [self.viewModel modelForImageCellAtIndex:(NSUInteger)indexPath.row];
 
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
+    if (imageCellModel)
+    {
+        ADRSearchResultsImageCell *imageCell = (ADRSearchResultsImageCell *)cell;
+        imageCell.viewModel = imageCellModel;
+    }
+    else
+    {
+        ADRSearchResultsLoadingCell *loadingCell = (ADRSearchResultsLoadingCell *)cell;
+        loadingCell.viewModel = [self.viewModel modelForLoadingCell];
+    }
 }
 
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
 
 @end

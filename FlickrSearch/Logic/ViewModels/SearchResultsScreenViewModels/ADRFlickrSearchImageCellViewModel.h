@@ -5,15 +5,21 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIImage.h>
+#import "ADRSearchResultsImageCellViewModelProtocol.h"
 
 @class ADRFlickrPhoto;
 
-///TODO Docs
-@interface ADRFlickrSearchImageCellViewModel : NSObject
+///Flickr.com result image cell view model
+@interface ADRFlickrSearchImageCellViewModel : NSObject <ADRSearchResultsImageCellViewModelProtocol>
 
-@property (nonatomic, copy, readonly, nonnull) NSString *title;
-@property (nonatomic, strong, readonly, nonnull) UIImage *image;
-
+/// Initialization method of ADRFlickrSearchImageCellViewModel
+/// @param photo model object represents one photo
+/// @param image image connected to this photo
+/// @return new instance of ADRFlickrSearchImageCellViewModel
 - (nullable instancetype)initWithPhoto:(nonnull ADRFlickrPhoto *)photo image:(nonnull UIImage *)image;
+
+///Made init and new unavailable to avoid creation without mandatory parameters
++ (nullable instancetype)new NS_UNAVAILABLE;
+- (nullable instancetype)init NS_UNAVAILABLE;
 
 @end

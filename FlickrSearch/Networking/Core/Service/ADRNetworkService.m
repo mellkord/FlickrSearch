@@ -29,7 +29,7 @@
     return self;
 }
 
-- (void)addParametersToURLConponents:(NSURLComponents *)urlComponents
+- (void)addParametersToURLComponents:(NSURLComponents *)urlComponents;
 {
     NSAssert(NO, @"Child class should override this method");
 }

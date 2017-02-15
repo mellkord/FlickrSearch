@@ -7,15 +7,15 @@
 
 @class ADRNetworkService;
 
-///
+///Class representing single network resource
 @interface ADRNetworkResource : NSObject
 
-///
+///NetworkService service associated with resource
 @property (nonatomic, weak, readonly, nullable) ADRNetworkService *networkService;
 
-///
-/// @param flickrNetworkService
-/// @return
+/// Initialization method of network resource
+/// @param networkService service associated with resource
+/// @return new instance of network service
 - (nullable instancetype)initWithService:(nonnull ADRNetworkService *)networkService;
 
 @end
