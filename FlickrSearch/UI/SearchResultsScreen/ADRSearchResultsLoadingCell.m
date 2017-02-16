@@ -7,7 +7,10 @@
 #import "ADRSearchResultsLoadingCellViewModelProtocol.h"
 #import <Masonry/Masonry.h>
 
-//TODO move magic numbers to constants
+static const int kImageEdgeMargins = 20;
+static const int kErrorLeftRightMargins = 10;
+static const int kErrorHeight = 20;
+
 @interface ADRSearchResultsLoadingCell ()
 
 @property (nonatomic, strong, readonly, nonnull) UIActivityIndicatorView *activityView;
@@ -33,7 +36,7 @@
 
 - (void)setupSubviews
 {
-    self.backgroundColor = UIColor.lightGrayColor; //self.viewModel.backgroundColor;
+    self.backgroundColor = UIColor.lightGrayColor;
 
     _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [self addSubview:self.activityView];
@@ -48,14 +51,14 @@
 {
     [self.activityView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.edges.equalTo(self).offset(20);
+        make.edges.equalTo(self).offset(kImageEdgeMargins);
     }];
 
     [self.errorLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.leading.equalTo(self).offset(10);
-        make.trailing.equalTo(self).offset(-10);
-        make.height.equalTo(@20);
+        make.leading.equalTo(self).offset(kErrorLeftRightMargins);
+        make.trailing.equalTo(self).offset(-kErrorLeftRightMargins);
+        make.height.equalTo(@(kErrorHeight));
     }];
 }
 

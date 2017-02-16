@@ -6,6 +6,10 @@
 //  Copyright © 2017 Dmitrii Aitov. All rights reserved.
 //
 
+#import "DDLogMacros.h"
+
+#define DD_LEGACY_MACROS 0
+
 #import "DDLog.h"
 
 #define WeakRef(identifier) __weak __typeof(identifier) weak_ ## identifier = identifier

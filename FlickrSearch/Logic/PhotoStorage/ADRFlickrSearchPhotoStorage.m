@@ -124,17 +124,19 @@ static NSUInteger const kPageSize = 100;
 - (void)loadMorePhotos
 {
     self.currentPage++;
+    weakself;
     [self.flickrService.photoResource searchPhotosForString:self.searchString page:self.currentPage photosPerPage:kPageSize completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+        strongself;
         if (error)
         {
-            NSLog(@"error: %@", error);
+            DDLogError(@"error: %@", error);
             return;
         }
 
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         if (httpResponse.statusCode > 200)
         {
-            NSLog(@"http error with code: %ld description: %@", (long)httpResponse.statusCode, [NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]);
+            DDLogError(@"http error with code: %ld description: %@", (long)httpResponse.statusCode, [NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]);
             return;
         }
 
@@ -160,30 +162,32 @@ static NSUInteger const kPageSize = 100;
 
 - (void)loadImageWithURL:(NSURL *)url
 {
+    weakself;
     [self.flickrService.photoResource getImageWithURL:url downloadCompletion:^(NSURL *fileUrl, NSURLResponse *response, NSError *error) {
+        strongself;
         if (error)
         {
-            NSLog(@"error: %@", error);
+            DDLogError(@"error: %@", error);
             return;
         }
 
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        if (httpResponse.statusCode > 201)
+        if (httpResponse.statusCode > 200)
         {
-            NSLog(@"http error with code: %ld description: %@", (long)httpResponse.statusCode, [NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]);
+            DDLogError(@"http error with code: %ld description: %@", (long)httpResponse.statusCode, [NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]);
             return;
         }
 
         if (![NSFileManager.defaultManager fileExistsAtPath:fileUrl.path])
         {
-            NSLog(@"error file doesnt exists at url: %@", url);
+            DDLogError(@"error file doesnt exists at url: %@", url);
             return;
         }
 
         UIImage *image = [UIImage imageWithContentsOfFile:fileUrl.path];
         if (!image)
         {
-            NSLog(@"error couldn't create file from url: %@", url);
+            DDLogError(@"error couldn't create file from url: %@", url);
             return;
         }
 

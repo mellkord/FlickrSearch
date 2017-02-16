@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  FlickrSearch
+
+  Created by dmitrii.aitov@philips.com on 16/02/17.
+  Copyright © 2017 Dmitrii Aitov. All rights reserved.
+*/
+"search_text_field_placeholder" = "Тэги, Ключевые слова и тд.";
+"search_button_title" = "Начать Поиск";
+"history_button_title" = "Заглянуть в Историю";
+"history_screen_title" = "История Поиска";

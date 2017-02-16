@@ -4,6 +4,8 @@
 //
 
 #import "ADRFlickrSearchViewModel.h"
+#import "ADRSearchHistoryStorage.h"
+#import "AppDelegate.h"
 
 
 @implementation ADRFlickrSearchViewModel
@@ -20,18 +22,17 @@
 
 - (NSString *)historyButtonTitle
 {
-    return NSLocalizedString(@"search_button_title", @"Title of history button");
+    return NSLocalizedString(@"history_button_title", @"Title of history button");
 }
 
 - (BOOL)historyButtonEnable
 {
-    //TODO check local storage
-    return YES;
+    AppDelegate *appDelegate = (AppDelegate *)UIApplication.sharedApplication.delegate;
+    return appDelegate.historyStorage.searchHistories.count > 0;
 }
 
 - (BOOL)historyButtonVisible
 {
-    //TODO check local storage
     return YES;
 }
 

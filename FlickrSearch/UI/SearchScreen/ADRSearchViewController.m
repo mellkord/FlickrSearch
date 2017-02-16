@@ -10,9 +10,20 @@
 #import "ADRFlickrSearchResultsViewModel.h"
 #import "ADRFlickrSearchPhotoStorage.h"
 #import "ADRFlickrNetworkService.h"
-#import "ADRNetworkClient.h"
+#import "ADRSearchHistoryStorage.h"
+#import "ADRSearchHistoryItem.h"
+#import "ADRFlickrSearchHistoryViewModel.h"
+#import "AppDelegate.h"
 #import <Masonry/Masonry.h>
 
+
+static const float kElementsAlpha = 0.75f;
+static const float kElementsBorderWidth = 2.0f;
+static const int kElementsHeight = 40;
+static const int kLeftRightMargin = 30;
+static const int kTopMargin = 120;
+static const int kBottomMargin = 20;
+static const int kLogoWidthHeight = 256;
 
 @interface ADRSearchViewController ()
 
@@ -56,25 +67,26 @@
 
     _searchTextField = [[UITextField alloc] init];
     self.searchTextField.placeholder = self.viewModel.searchTextFieldPlaceholder;
-    self.searchTextField.layer.borderColor = [UIColor colorWithRed:1.0f green:0.0f blue:132.0f/255.0f alpha:1.0f].CGColor;
-    self.searchTextField.layer.borderWidth = 2.0f;
-    self.searchTextField.backgroundColor = [UIColor.whiteColor colorWithAlphaComponent:0.75];
+    self.searchTextField.layer.borderColor = [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:132.0f/255.0f alpha:1.0f].CGColor;
+    self.searchTextField.layer.borderWidth = kElementsBorderWidth;
+    self.searchTextField.textAlignment = NSTextAlignmentCenter;
+    self.searchTextField.backgroundColor = [UIColor.whiteColor colorWithAlphaComponent:kElementsAlpha];
     [self.view addSubview:self.searchTextField];
 
     _searchButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.searchButton setTitle:self.viewModel.searchButtonTitle forState:UIControlStateNormal];
     [self.searchButton addTarget:self action:@selector(searchButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    self.searchButton.layer.borderColor = [UIColor colorWithRed:0.0f green:99.0f/255.0f blue:219.0f/255.0f alpha:1.0f].CGColor;
-    self.searchButton.layer.borderWidth = 2.0f;
-    self.searchButton.backgroundColor = [UIColor.whiteColor colorWithAlphaComponent:0.75];
+    self.searchButton.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:99.0f/255.0f blue:219.0f/255.0f alpha:1.0f].CGColor;
+    self.searchButton.layer.borderWidth = kElementsBorderWidth;
+    self.searchButton.backgroundColor = [UIColor.whiteColor colorWithAlphaComponent:kElementsAlpha];
     [self.view addSubview:self.searchButton];
 
     _historyButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [self.historyButton setTitle:self.viewModel.searchButtonTitle forState:UIControlStateNormal];
+    [self.historyButton setTitle:self.viewModel.historyButtonTitle forState:UIControlStateNormal];
     [self.historyButton addTarget:self action:@selector(historyButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    self.historyButton.layer.borderColor = [UIColor colorWithRed:0.0f green:99.0f/255.0f blue:219.0f/255.0f alpha:1.0f].CGColor;
-    self.historyButton.layer.borderWidth = 2.0f;
-    self.historyButton.backgroundColor = [UIColor.whiteColor colorWithAlphaComponent:0.75];
+    self.historyButton.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:99.0f/255.0f blue:219.0f/255.0f alpha:1.0f].CGColor;
+    self.historyButton.layer.borderWidth = kElementsBorderWidth;
+    self.historyButton.backgroundColor = [UIColor.whiteColor colorWithAlphaComponent:kElementsAlpha];
     self.historyButton.enabled = self.viewModel.historyButtonEnable;
     self.historyButton.hidden = !self.viewModel.historyButtonVisible;
     [self.view addSubview:self.historyButton];
@@ -92,6 +104,7 @@
 {
     [super viewWillAppear:animated];
 
+    self.historyButton.enabled = self.viewModel.historyButtonEnable;
     self.navigationController.navigationBarHidden = YES;
 }
 
@@ -108,31 +121,31 @@
 - (void)setupConstraints
 {
     [self.searchTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(120);
-        make.leading.equalTo(self.view).offset(30);
-        make.trailing.equalTo(self.view).offset(-30);
-        make.height.equalTo(@40);
+        make.top.equalTo(self.view).offset(kTopMargin);
+        make.leading.equalTo(self.view).offset(kLeftRightMargin);
+        make.trailing.equalTo(self.view).offset(-kLeftRightMargin);
+        make.height.equalTo(@(kElementsHeight));
     }];
 
     [self.searchButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.searchTextField.mas_bottom).offset(20);
+        make.top.equalTo(self.searchTextField.mas_bottom).offset(kBottomMargin);
         make.leading.equalTo(self.searchTextField);
         make.trailing.equalTo(self.searchTextField);
-        make.height.equalTo(@40);
+        make.height.equalTo(@(kElementsHeight));
     }];
 
     [self.historyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.searchButton.mas_bottom).offset(20);
+        make.top.equalTo(self.searchButton.mas_bottom).offset(kBottomMargin);
         make.leading.equalTo(self.searchTextField);
         make.trailing.equalTo(self.searchTextField);
-        make.height.equalTo(@40);
+        make.height.equalTo(@(kElementsHeight));
     }];
 
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.historyButton.mas_bottom).offset(20);
+        make.top.equalTo(self.historyButton.mas_bottom).offset(kBottomMargin);
         make.centerX.equalTo(self.view);
-        make.width.equalTo(@256);
-        make.height.equalTo(@256);
+        make.width.equalTo(@(kLogoWidthHeight));
+        make.height.equalTo(@(kLogoWidthHeight));
     }];
 
     [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -142,7 +155,8 @@
 
 - (void)historyButtonClicked
 {
-    ADRSearchHistoryViewController *searchHistoryViewController = [[ADRSearchHistoryViewController alloc] init];
+    ADRFlickrSearchHistoryViewModel *searchHistoryViewModel = [[ADRFlickrSearchHistoryViewModel alloc] init];
+    ADRSearchHistoryViewController *searchHistoryViewController = [[ADRSearchHistoryViewController alloc] initWithViewModel:searchHistoryViewModel];
     [self.navigationController pushViewController:searchHistoryViewController animated:YES];
 }
 
@@ -153,11 +167,11 @@
         return;
     }
 
-    ///TODO Add search to local storage
-    ADRFlickrNetworkService *flickrNetworkService = [[ADRFlickrNetworkService alloc] initWithAPIKey:@"665d363377bed56ced37a627947ebc56" networkClient:[[ADRNetworkClient alloc] init]];
-    ADRFlickrSearchPhotoStorage *photoStorage = [[ADRFlickrSearchPhotoStorage alloc] initWithSearchString:self.searchTextField.text flickrService:flickrNetworkService delegate:nil];
+    AppDelegate *appDelegate = (AppDelegate *)UIApplication.sharedApplication.delegate;
+    [appDelegate.historyStorage addSearchHistory:[[ADRSearchHistoryItem alloc] initWithSearchString:self.searchTextField.text searchDate:[NSDate date]]];
+
+    ADRFlickrSearchPhotoStorage *photoStorage = [[ADRFlickrSearchPhotoStorage alloc] initWithSearchString:self.searchTextField.text flickrService:appDelegate.flickrNetworkService delegate:nil];
     ADRFlickrSearchResultsViewModel *searchResultsViewModel = [[ADRFlickrSearchResultsViewModel alloc] initWithSearchString:self.searchTextField.text photoStorage:photoStorage];
-    photoStorage.delegate = searchResultsViewModel;
     ADRSearchResultsViewController *searchResultsViewController = [[ADRSearchResultsViewController alloc] initWithViewModel:searchResultsViewModel];
     [self.navigationController pushViewController:searchResultsViewController animated:YES];
 }

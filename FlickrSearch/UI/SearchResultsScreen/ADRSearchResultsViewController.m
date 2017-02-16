@@ -11,6 +11,10 @@
 static NSString * const kImageCellReuseIdentifier = @"ADRSearchResultsImageCell";
 static NSString * const kLoadingCellReuseIdentifier = @"ADRSearchResultsLoadingCell";
 
+static const float kContentInset = 10.0f;
+static const float kItemWidth = 90.0f;
+static const float kItemHeight = 125.0f;
+
 @interface ADRSearchResultsViewController ()
 
 @property (nonatomic, strong, readonly, nonnull) NSObject<ADRSearchResultsScreenViewModelProtocol> *viewModel;
@@ -22,7 +26,7 @@ static NSString * const kLoadingCellReuseIdentifier = @"ADRSearchResultsLoadingC
 - (nullable instancetype)initWithViewModel:(nonnull NSObject<ADRSearchResultsScreenViewModelProtocol> *)viewModel;
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(90, 125);
+    flowLayout.itemSize = CGSizeMake(kItemWidth, kItemHeight);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     self = [super initWithCollectionViewLayout:flowLayout];
 
@@ -38,12 +42,12 @@ static NSString * const kLoadingCellReuseIdentifier = @"ADRSearchResultsLoadingC
     [super viewDidLoad];
 
     self.viewModel.collectionView = self.collectionView;
-    self.collectionView.contentInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    self.title = self.viewModel.searchString;
+    self.collectionView.backgroundColor = UIColor.darkGrayColor;
+    self.collectionView.contentInset = UIEdgeInsetsMake(kContentInset, kContentInset, kContentInset, kContentInset);
 
     [self.collectionView registerClass:[ADRSearchResultsImageCell class] forCellWithReuseIdentifier:kImageCellReuseIdentifier];
     [self.collectionView registerClass:[ADRSearchResultsLoadingCell class] forCellWithReuseIdentifier:kLoadingCellReuseIdentifier];
-
-    // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -15,9 +15,6 @@
 
 - (instancetype)initWithBaseURL:(NSURL *)baseURL networkClient:(NSObject<ADRNetworkClientProtocol> *)networkClient
 {
-    //NSParameterAssert(baseURL, @"Base url shouldn't be nil");
-    //NSParameterAssert(networkClient, @"Network client shouldn't be nil");
-
     self = [super init];
 
     if (self)

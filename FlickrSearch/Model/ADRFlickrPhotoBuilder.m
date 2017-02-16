@@ -8,6 +8,15 @@
 #import "ADRFlickrPhoto.h"
 
 
+static NSString *const kPhotosDictionaryKey = @"photos";
+static NSString *const kPhotosArrayKey = @"photo";
+static NSString *const kPhotoIdentifierKey = @"id";
+static NSString *const kServerKey = @"server";
+static NSString *const kFarmKey = @"farm";
+static NSString *const kOwnerKey = @"owner";
+static NSString *const kPhotoSecretKey = @"secret";
+static NSString *const kPhotoTitleKey = @"title";
+
 @implementation ADRFlickrPhotoBuilder
 //TODO move all string to constants section
 + (NSArray<ADRFlickrPhoto *> *)photosFromJSONData:(NSData *)jsonData
@@ -20,14 +29,14 @@
         return nil;
     }
 
-    NSDictionary *photosDict = responseDict[@"photos"];
+    NSDictionary *photosDict = responseDict[kPhotosDictionaryKey];
 
     if (!photosDict)
     {
         return nil;
     }
 
-    NSArray *photosArray = photosDict[@"photo"];
+    NSArray *photosArray = photosDict[kPhotosArrayKey];
 
     if (!photosArray)
     {
@@ -35,42 +44,42 @@
     }
 
     NSArray<ADRFlickrPhoto *> *photos = [photosArray bk_map:^ADRFlickrPhoto*(NSDictionary *photoDict) {
-        NSUInteger identifier = ((NSString *)photoDict[@"id"]).longLongValue;
+        NSUInteger identifier = ((NSString *)photoDict[kPhotoIdentifierKey]).longLongValue;
 
         if (identifier == 0)
         {
             return nil;
         }
 
-        NSUInteger server = ((NSString *)photoDict[@"server"]).longLongValue;
+        NSUInteger server = ((NSString *)photoDict[kServerKey]).longLongValue;
 
         if (server == 0)
         {
             return nil;
         }
 
-        NSUInteger farm = ((NSNumber *)photoDict[@"farm"]).unsignedIntegerValue;
+        NSUInteger farm = ((NSNumber *)photoDict[kFarmKey]).unsignedIntegerValue;
 
         if (farm == 0)
         {
             return nil;
         }
 
-        NSString *owner = photoDict[@"owner"];
+        NSString *owner = photoDict[kOwnerKey];
 
         if (!owner)
         {
             return nil;
         }
 
-        NSString *secret = photoDict[@"secret"];
+        NSString *secret = photoDict[kPhotoSecretKey];
 
         if (!secret)
         {
             return nil;
         }
 
-        NSString *title = photoDict[@"title"];
+        NSString *title = photoDict[kPhotoTitleKey];
 
         if (!title)
         {

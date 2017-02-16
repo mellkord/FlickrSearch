@@ -27,6 +27,7 @@
     {
         _searchString = searchString;
         _storage = storage;
+        _storage.delegate = self;
     }
 
     return self;

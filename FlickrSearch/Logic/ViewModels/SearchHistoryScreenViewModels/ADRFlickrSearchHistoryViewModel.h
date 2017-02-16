@@ -4,7 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ADRSearchHistoryScreenViewModelProtocol.h"
 
-
-@interface ADRFlickrSearchHistoryViewModel : NSObject
+///Flickr.com search history view model
+@interface ADRFlickrSearchHistoryViewModel : NSObject <ADRSearchHistoryScreenViewModelProtocol>
 @end

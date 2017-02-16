@@ -6,16 +6,21 @@
 #import "ADRFlickrPhotoResource.h"
 #import "ADRNetworkService.h"
 
+static NSString *const kMethodQueryKey       = @"method";
+static NSString *const kMethodQueryValue     = @"flickr.photos.search";
+static NSString *const kTextQueryKey         = @"text";
+static NSString *const kPageQueryKey         = @"page";
+static NSString *const kItemsPerPageQueryKey = @"per_page";
 
 @implementation ADRFlickrPhotoResource
 
 - (NSURLSessionTask *)searchPhotosForString:(NSString *)searchString page:(NSUInteger)page photosPerPage:(NSUInteger)photosPerPage completion:(ADRNetworkClientCompletionBlock)completion;
 {
     NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:self.networkService.baseURL resolvingAgainstBaseURL:YES];
-    urlComponents.queryItems = @[[NSURLQueryItem queryItemWithName:@"method" value:@"flickr.photos.search"]];
-    urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:@"text" value:searchString]];
-    urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:@"page" value:[NSString stringWithFormat:@"%lu", page]]];
-    urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:@"per_page" value:[NSString stringWithFormat:@"%lu", photosPerPage]]];
+    urlComponents.queryItems = @[[NSURLQueryItem queryItemWithName:kMethodQueryKey value:kMethodQueryValue]];
+    urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:kTextQueryKey value:searchString]];
+    urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:kPageQueryKey value:[NSString stringWithFormat:@"%lu", page]]];
+    urlComponents.queryItems = [urlComponents.queryItems arrayByAddingObject:[NSURLQueryItem queryItemWithName:kItemsPerPageQueryKey value:[NSString stringWithFormat:@"%lu", photosPerPage]]];
 
     [self.networkService addParametersToURLComponents:urlComponents];
 
@@ -26,19 +31,19 @@
 
 - (NSURLSessionTask *)getInfoForPhotoId:(NSString *)photoId completion:(ADRNetworkClientCompletionBlock)completion
 {
-    NSLog(@"Not implemented yet");
+    DDLogError(@"Not implemented yet");
     return nil;
 }
 
 - (NSURLSessionTask *)getSizesForPhotoId:(NSString *)photoId completion:(ADRNetworkClientCompletionBlock)completion
 {
-    NSLog(@"Not implemented yet");
+    DDLogError(@"Not implemented yet");
     return nil;
 }
 
 - (NSURLSessionTask *)getFavoritesForPhotoId:(NSString *)photoId completion:(ADRNetworkClientCompletionBlock)completion
 {
-    NSLog(@"Not implemented yet");
+    DDLogError(@"Not implemented yet");
     return nil;
 }
 

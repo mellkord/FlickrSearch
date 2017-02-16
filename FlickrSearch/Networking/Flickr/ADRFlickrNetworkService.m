@@ -14,6 +14,8 @@ static NSString *const kCallbackQueryKey = @"nojsoncallback";
 static NSString *const kFormatQueryValue = @"json";
 static NSString *const kCallbackQueryValue = @"1";
 
+static NSString *const kFlickrRestAPIBaseUrl = @"https://api.flickr.com/services/rest/";
+
 ///Base url to flickr.com REST API
 static NSURL *kFlickrBaseURL = nil;
 
@@ -31,7 +33,7 @@ static NSURL *kFlickrBaseURL = nil;
 {
     if(!kFlickrBaseURL)
     {
-        kFlickrBaseURL = [[NSURL alloc] initWithString:@"https://api.flickr.com/services/rest/"];
+        kFlickrBaseURL = [[NSURL alloc] initWithString:kFlickrRestAPIBaseUrl];
     }
 }
 

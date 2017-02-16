@@ -4,92 +4,96 @@
 //
 
 #import "ADRSearchHistoryViewController.h"
+#import "ADRSearchHistoryScreenViewModelProtocol.h"
+#import "ADRSearchHistoryStorage.h"
+#import "ADRFlickrSearchPhotoStorage.h"
+#import "ADRFlickrSearchResultsViewModel.h"
+#import "ADRSearchResultsViewController.h"
+#import "ADRSearchHistoryItem.h"
+#import "AppDelegate.h"
+#import "ADRSearchHistoryTableCell.h"
+#import "ADRSearchHistoryTableCellViewModelProtocol.h"
+
+static NSString * const kHistoryCellReuseIdentifier = @"ADRSearchHistoryCell";
+
+static const float kHistoryCellHeight = 60.0f;
 
 @interface ADRSearchHistoryViewController ()
+
+@property (nonatomic, strong, readonly, nonnull) NSObject <ADRSearchHistoryScreenViewModelProtocol> *viewModel;
 
 @end
 
 @implementation ADRSearchHistoryViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+- (instancetype)initWithViewModel:(NSObject <ADRSearchHistoryScreenViewModelProtocol> *)viewModel
+{
+    self = [super init];
+
+    if (self)
+    {
+        _viewModel = viewModel;
+    }
+
+    return self;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView registerClass:[ADRSearchHistoryTableCell class] forCellReuseIdentifier:kHistoryCellReuseIdentifier];
+
+    self.title = self.viewModel.screenTitle;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    self.navigationController.navigationBarHidden = NO;
+
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.viewModel.historyCount;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kHistoryCellReuseIdentifier forIndexPath:indexPath];
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ADRSearchHistoryTableCell *historyCell = (ADRSearchHistoryTableCell *)cell;
+    historyCell.viewModel = [self.viewModel modelForHistoryCellAtIndex:indexPath.row];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    AppDelegate *appDelegate = (AppDelegate *)UIApplication.sharedApplication.delegate;
+    [appDelegate.historyStorage addSearchHistory:[[ADRSearchHistoryItem alloc] initWithSearchString:[self.viewModel modelForHistoryCellAtIndex:indexPath.row].searchString searchDate:[NSDate date]]];
+
+    ADRFlickrSearchPhotoStorage *photoStorage = [[ADRFlickrSearchPhotoStorage alloc] initWithSearchString:[self.viewModel modelForHistoryCellAtIndex:indexPath.row].searchString flickrService:appDelegate.flickrNetworkService delegate:nil];
+    ADRFlickrSearchResultsViewModel *searchResultsViewModel = [[ADRFlickrSearchResultsViewModel alloc] initWithSearchString:[self.viewModel modelForHistoryCellAtIndex:indexPath.row].searchString photoStorage:photoStorage];
+    ADRSearchResultsViewController *searchResultsViewController = [[ADRSearchResultsViewController alloc] initWithViewModel:searchResultsViewModel];
+    [self.navigationController pushViewController:searchResultsViewController animated:YES];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return kHistoryCellHeight;
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

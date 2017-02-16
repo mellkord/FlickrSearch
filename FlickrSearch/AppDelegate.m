@@ -9,7 +9,12 @@
 #import "AppDelegate.h"
 #import "ADRSearchViewController.h"
 #import "ADRFlickrSearchViewModel.h"
+#import "ADRSearchHistoryStorage.h"
+#import "ADRFlickrNetworkService.h"
+#import "ADRNetworkClient.h"
 
+
+static NSString *const kFlickrAPIKey = @"2ff0c003011f52f2362c80190dbedd27";
 
 @interface AppDelegate ()
 
@@ -17,10 +22,10 @@
 
 @implementation AppDelegate
 
-
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    _historyStorage = [[ADRSearchHistoryStorage alloc] init];
+    _flickrNetworkService = [[ADRFlickrNetworkService alloc] initWithAPIKey:kFlickrAPIKey networkClient:[[ADRNetworkClient alloc] init]];
 
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     ADRFlickrSearchViewModel *searchViewModel = [[ADRFlickrSearchViewModel alloc] init];
