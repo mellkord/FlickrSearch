@@ -13,8 +13,7 @@
 #import "ADRFlickrNetworkService.h"
 #import "ADRNetworkClient.h"
 
-
-static NSString *const kFlickrAPIKey = @"2ff0c003011f52f2362c80190dbedd27";
+static NSString *const kFlickrAPIKey = @"3e7cc266ae2b0e0d78e279ce8e361736";
 
 @interface AppDelegate ()
 
